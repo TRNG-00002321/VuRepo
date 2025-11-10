@@ -20,9 +20,10 @@ else:
     nickles = int(input("How many nickles? "))
     pennies = int(input("How many pennies? "))
     balance = quarters*.25 + dimes*.10 +nickles*.05 + pennies*0.01
-    print(f"Your balance is {balance}")
+    print(f"Your balance is {balance:.2f}")
     if balance < price:
         print("Sorry, you don't have enough money")
         sys.exit()
     else:
-        print(f"Purchased {selected_drink[0]}, Your change is {balance}")
+        change = balance - price
+        print(f"Purchased {selected_drink[0]}, Your change is {change:.2f}")

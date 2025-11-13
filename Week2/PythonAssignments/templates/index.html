@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses</title>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+
+    <h2>Add Expense</h2>
+    <form action="/add" method="POST">
+        Date: <input type="text" name="date" required>
+        Amount: <input type="number" name="amount" step="0.01" required>
+        Category: <input type="text" name="category" required>
+        Description: <input type="text" name="description">
+        <input type="submit" value="Add">
+    </form>
+
+    <h2>All Expenses</h2>
+    <table border="1">
+        <tr>
+            <th>Date</th><th>Amount</th><th>Category</th><th>Description</th><th>Actions</th>
+        </tr>
+        {% for id, expense in expenses.items() %}
+        <tr>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.description }}</td>
+            <td>
+                <a href="/update/{{ id }}">Edit</a> |
+                <form action="/delete/{{ id }}" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Are you sure?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

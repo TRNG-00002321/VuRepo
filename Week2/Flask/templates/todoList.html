@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+
+    <!-- Table showing todos -->
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Status</th>
+        </tr>
+        {% for todo, status in tasks.items() %}
+        <tr>
+            <td>{{ todo }}</td>
+            <td>{{ status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <!-- Add Task -->
+    <form action="/add" method="POST">
+        <label for="add-todo">New Task:</label>
+        <input type="text" id="add-todo" name="todo" required>
+        <input type="submit" value="Add Task">
+    </form>
+    <br>
+
+    <!-- Update Task -->
+    <form action="/update" method="POST">
+        <label for="update-todo">Task already done:</label>
+        <input type="text" id="update-todo" name="todo" required>
+        <input type="submit" value="Mark done">
+    </form>
+    <br>
+
+    <!-- Delete Task -->
+    <form action="/delete" method="POST">
+        <label for="delete-todo">Task to Delete:</label>
+        <input type="text" id="delete-todo" name="todo" required>
+        <input type="submit" value="Delete Task">
+    </form>
+
+
+</body>
+</html>

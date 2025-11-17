@@ -85,7 +85,7 @@ def submit_expense(user_id):
     description = input('Enter your expense description: ').strip()
     date = input('Enter your expense date: ').strip()
     cursor.execute(
-        "INSERT INTO expenses (user_id, amount, description, date) VALUES (?, ?, ?, ?)", (user_id, amount, description, date)
+    "INSERT INTO expenses (user_id, amount, description, date) VALUES (?, ?, ?, ?)", (user_id, amount, description, date)
     )
     conn.commit()
     new_expense_id = cursor.lastrowid

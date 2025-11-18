@@ -211,7 +211,6 @@ def edit_expense(user_id):
     if not pending_list:
         print("No pending expense to edit.")
         return
-
     try:
         expense_id = int(input("Enter the Expense ID you want to edit: ").strip())
     except ValueError:
@@ -219,7 +218,6 @@ def edit_expense(user_id):
         return
 
     valid_ids = [exp[0] for exp in pending_list]
-
     if expense_id not in valid_ids:
         print("Error: you can only edit your own pending expenses.")
         return
@@ -255,6 +253,33 @@ def edit_expense(user_id):
     conn.close()
     print("\nExpense updated successfully!")
 
+def delete_expense(user_id):
+    print("\n=== Pending expense (Deletable) ===")
+    pending_list = view_pending_expenses(user_id)
+
+    if not pending_list:
+        print("No pending expense to delete.")
+        return
+    try:
+        expense_id = int(input("Enter the Expense ID you want to delete: ").strip())
+    except ValueError:
+        print("Invalid Expense ID.")
+        return
+
+    valid_ids = [exp[0] for exp in pending_list]
+    if expense_id not in valid_ids:
+        print("Error: you can only delete your own pending expenses.")
+        return
+
+    conn = sqlite3.connect('expenses.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM expenses WHERE id = ?", (expense_id,)
+    )
+
+    conn.commit()
+    conn.close()
+    print("\nExpense deleted successfully!")
 
 def employee_menu(user_id):
     while True:
@@ -264,10 +289,10 @@ def employee_menu(user_id):
         print("3. View Pending Expenses")
         print("4. View Expense History")
         print("5. Edit Pending Expense")
-        print("6. Logout")
+        print("6. Delete Pending Expense")
+        print("7. Logout")
 
         choice = input("Enter choice: ").strip()
-
         if choice == "1":
             submit_expense(user_id)
         elif choice == "2":
@@ -279,6 +304,8 @@ def employee_menu(user_id):
         elif choice == "5":
             edit_expense(user_id)
         elif choice == "6":
+            delete_expense(user_id)
+        elif choice == "7":
             print("Logging out...")
             break
         else:
@@ -290,7 +317,6 @@ def main():
     user_id = login()
     if user_id:
         employee_menu(user_id)
-
 
 if __name__ == '__main__':
     main()

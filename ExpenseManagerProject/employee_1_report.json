@@ -1,0 +1,31 @@
+[ {
+  "expenseId" : 1,
+  "userId" : 1,
+  "amount" : 5.0,
+  "description" : "water",
+  "date" : "2025-11-20",
+  "status" : "approved",
+  "reviewerId" : 2,
+  "comment" : "valid expense",
+  "reviewDate" : "2025-11-23"
+}, {
+  "expenseId" : 3,
+  "userId" : 1,
+  "amount" : 7.0,
+  "description" : "snacks",
+  "date" : "2025-10-20",
+  "status" : "approved",
+  "reviewerId" : 2,
+  "comment" : "valid expense",
+  "reviewDate" : "2025-11-29"
+}, {
+  "expenseId" : 2,
+  "userId" : 1,
+  "amount" : 3.0,
+  "description" : "pen",
+  "date" : "2025-10-19",
+  "status" : "denied",
+  "reviewerId" : 2,
+  "comment" : "invalid expense",
+  "reviewDate" : "2025-11-23"
+} ]

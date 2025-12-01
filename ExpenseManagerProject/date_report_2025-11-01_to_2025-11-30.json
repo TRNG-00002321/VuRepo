@@ -1,0 +1,11 @@
+[ {
+  "expenseId" : 1,
+  "userId" : 1,
+  "amount" : 5.0,
+  "description" : "water",
+  "date" : "2025-11-20",
+  "status" : "approved",
+  "reviewerId" : 2,
+  "comment" : "valid expense",
+  "reviewDate" : "2025-11-23"
+} ]

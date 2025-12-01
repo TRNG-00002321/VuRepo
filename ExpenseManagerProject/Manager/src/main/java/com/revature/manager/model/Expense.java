@@ -11,6 +11,9 @@ public class Expense {
     private String comment;
     private String reviewDate;
 
+    public Expense() {
+    }
+
     public Expense(int expenseId, int userId, double amount, String description, String date, String status, int reviewerId, String comment, String reviewDate) {
         this.expenseId = expenseId;
         this.userId = userId;

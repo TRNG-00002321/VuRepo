@@ -1,23 +1,19 @@
 package com.revature.manager.main;
-import java.util.*;
-import com.revature.manager.dao.ApprovalDaoImpl;
-import com.revature.manager.model.Expense;
+import com.revature.manager.service.ExpenseService;
+import com.revature.manager.service.ExpenseServiceImpl;
+import static java.lang.Integer.parseInt;
 
 public class Main {
     public static void main(String[] args) {
-
-        ApprovalDaoImpl approvalDao = new ApprovalDaoImpl();
-
-
-        approvalDao.approveExpense(1, 2,"valid expense");
-        approvalDao.rejectExpense(2, 2,"invalid expense");
-        List<Expense> approved = approvalDao.getAllExpenses();
-        for(Expense e:approved){
-            System.out.println(e.toString());
+        ExpenseService service = new ExpenseServiceImpl();
+        int managerId = service.loginService();
+        if(managerId != -1) {
+            System.out.println();
+            Menu menu = new Menu();
+            menu.managerMenu(managerId);
         }
-
-
-
-
+        else {
+            System.out.println("Login failed. Exiting...");
+        }
     }
 }

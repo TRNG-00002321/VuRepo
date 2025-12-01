@@ -7,7 +7,9 @@ import com.revature.manager.dao.ExpenseDaoImpl;
 import com.revature.manager.model.Expense;
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,14 +28,28 @@ public class ReportServiceImpl implements ReportService {
         }
         System.out.println();
         System.out.print("Enter an Employee ID to generate the report: ");
-        int empId = sc.nextInt();
-        List<Expense> expenses = new ArrayList<>();
-        String fileName = "employee_" + empId + "_report.json";
-        expenses = dao.getExpensesByEmployee(empId);
-        writeJson(fileName, expenses);
-        System.out.println("Report for Employee " + empId + " has been generated successfully.");
-        System.out.println("Saved as: " + fileName);
-        System.out.println();
+        int empId;
+        try {
+            empId = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a numeric Employee ID.");
+            sc.nextLine();
+            return;
+        }
+        if (empIds.contains(empId)) {
+            List<Expense> expenses = new ArrayList<>();
+            String fileName = "employee_" + empId + "_report.json";
+            expenses = dao.getExpensesByEmployee(empId);
+            writeJson(fileName, expenses);
+            System.out.println("Report for Employee " + empId + " has been generated successfully.");
+            System.out.println("Saved as: " + fileName);
+            System.out.println();
+        }
+        else {
+            System.out.println("Employee " + empId + " does not exist.");
+        }
     }
 
     @Override
@@ -44,16 +60,21 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void generateReportByDateRange() {
-        System.out.print("Enter start from date: ");
-        LocalDate start = LocalDate.parse(sc.nextLine());
-        System.out.print("Enter end date to generate report: ");
-        LocalDate end = LocalDate.parse(sc.nextLine());
-        List<Expense> expenses = new ArrayList<>();
-        String fileName = "date_report_" + start + "_to_" + end + ".json";
-        expenses = dao.getExpensesByDateRange(start, end);
-        writeJson(fileName, expenses);
-        System.out.println("Date range report generated successfully");
-        System.out.println();
+        try {
+            System.out.print("Enter start from date (YYYY-MM-DD): ");
+            LocalDate start = LocalDate.parse(sc.nextLine());
+            System.out.print("Enter end date (YYYY-MM-DD) to generate report: ");
+            LocalDate end = LocalDate.parse(sc.nextLine());
+            List<Expense> expenses = new ArrayList<>();
+            String fileName = "date_report_" + start + "_to_" + end + ".json";
+            expenses = dao.getExpensesByDateRange(start, end);
+            writeJson(fileName, expenses);
+            System.out.println("Date range report generated successfully");
+            System.out.println();
+        }
+        catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
+        }
     }
 
     private void writeJson(String filename, List<Expense> expenses){

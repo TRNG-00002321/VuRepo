@@ -166,6 +166,23 @@ public class ExpenseDaoImpl implements ExpenseDao {
         return ids;
     }
 
+    public List<Integer> getAllPendingExpenseId(){
+        List<Integer> ids = new ArrayList<>();
+        String query = "SELECT expense_id FROM approvals where status = 'pending'";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                ids.add(rs.getInt("expense_id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ids;
+    }
+
     @Override
     public void approveExpense(int expenseId, int managerId, String comment) {
         String query = "UPDATE approvals SET status = 'approved', reviewer_id = ?, comments = ?, review_date = CURRENT_DATE WHERE expense_id = ?";

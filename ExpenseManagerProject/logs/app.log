@@ -1,0 +1,10 @@
+12:16:28.420 [main] INFO  c.r.m.service.ExpenseServiceImpl - Login successful for username: manager1
+12:17:08.779 [main] INFO  c.r.m.service.ExpenseServiceImpl - Login successful for username: manager1
+12:17:10.890 [main] INFO  c.r.m.service.ExpenseServiceImpl - Fetching all expenses for viewing.
+12:17:18.228 [main] INFO  c.r.m.service.ReportServiceImpl - Opening Report Menu.
+12:17:22.885 [main] DEBUG c.r.m.service.ReportServiceImpl - User selected report option 1
+12:17:22.885 [main] INFO  c.r.m.service.ReportServiceImpl - User selected Monthly Spending Report.
+12:17:22.885 [main] INFO  c.r.m.service.ReportServiceImpl - Starting Monthly Report generation.
+12:28:12.619 [main] INFO  c.r.m.service.ExpenseServiceImpl - Login successful for username: manager1
+12:28:14.442 [main] INFO  c.r.m.service.ReportServiceImpl - Opening Report Menu.
+12:28:15.797 [main] INFO  c.r.m.service.ReportServiceImpl - Starting report generation by employee.

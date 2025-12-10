@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ReportService {
+    void generateReportMenu ();
+    void monthlyReport();
     void generateReportByEmployee();
-    void generateReportByCategory(List<Expense> expenses, String category);
-    void generateReportByDateRange();
 }

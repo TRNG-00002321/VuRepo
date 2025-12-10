@@ -7,6 +7,7 @@ def get_db():
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
         username TEXT NOT NULL,
         password TEXT NOT NULL,
         role TEXT NOT NULL
@@ -42,11 +43,11 @@ def get_db():
 def seed_users():
     conn = sqlite3.connect('expenses.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE username = ?", ("employee1",))
+    cursor.execute("SELECT * FROM users WHERE username = ?", ("employee2",))
     if cursor.fetchone() is None:
         cursor.execute('''
-            INSERT INTO users (username, password, role)
-            VALUES (?, ?, ?)
-        ''', ("employee1", "employeepass", "employee"))
+            INSERT INTO users (name, username, password, role)
+            VALUES (?, ?, ?, ?)
+        ''', ("John", "employee2", "employeepass", "employee"))
     conn.commit()
     conn.close()

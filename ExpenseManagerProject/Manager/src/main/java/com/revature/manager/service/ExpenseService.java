@@ -13,4 +13,6 @@ public interface ExpenseService {
     }
     public void approveService(int managerId);
     public void rejectService(int managerId);
+    void printExpenses(List<Expense> expenses);
+    public String trim(String s, int maxLength);
 }

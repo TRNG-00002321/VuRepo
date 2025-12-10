@@ -7,8 +7,11 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExpenseServiceImpl implements ExpenseService {
+    private static final Logger logger = LoggerFactory.getLogger(ExpenseServiceImpl.class);
     private final AuthHandler loginHandler = new AuthHandler();
     private final ExpenseDaoImpl dao = new ExpenseDaoImpl();
     Scanner sc = new Scanner(System.in);
@@ -21,14 +24,21 @@ public class ExpenseServiceImpl implements ExpenseService {
         System.out.print("Password: ");
         String password = sc.nextLine();
         int managerId = loginHandler.authenticateUser(username, password);
+        if (managerId != -1) {
+            logger.info("Login successful for username: {}", username);
+        } else {
+            logger.warn("Failed login attempt for username: {}", username);
+        }
         return managerId;
     }
 
     public List<Integer> empIds(){
+        logger.info("Fetching all employee IDs.");
         return dao.getAllEmployeeId();
     }
 
     public void viewAllExpenses(){
+        logger.info("Fetching all expenses for viewing.");
         List<Expense> expenses = dao.getAllExpenses();
         System.out.println();
         printExpenses(expenses);
@@ -36,6 +46,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     public List<Expense> viewPendingExpenses(){
+        logger.info("Fetching all pending expenses.");
         List<Expense> expenses = dao.getPendingExpenses();
         System.out.println();
         printExpenses(expenses);
@@ -45,33 +56,37 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public void approveService(int managerId) {
+        logger.info("Manager {} is attempting to approve an expense.", managerId);
         List<Expense> expenses = dao.getPendingExpenses();
         List<Integer> expIds =  dao.getAllPendingExpenseId();
         System.out.println();
         if(!expenses.isEmpty()){
             System.out.println("PENDING EXPENSES TO BE APPROVED");
             printExpenses(expenses);
-            try {
-                System.out.println();
-                System.out.print("Enter a valid Expense ID to approve: ");
-                int expenseId = sc.nextInt();
-                sc.nextLine();
-                if(expIds.contains(expenseId)){
-                    System.out.print("Enter comment: ");
-                    String approveComment = sc.nextLine();
-                    dao.approveExpense(expenseId, managerId, approveComment);
-                    System.out.println("Expense " + expenseId + " approved successfully.");
-                    System.out.println();
+            System.out.println();
+            while(true){
+                try {
+                    System.out.print("Enter a valid Expense ID to approve: ");
+                    int expenseId = sc.nextInt();
+                    sc.nextLine();
+                    if(expIds.contains(expenseId)){
+                        System.out.print("Enter comment: ");
+                        String approveComment = sc.nextLine();
+                        dao.approveExpense(expenseId, managerId, approveComment);
+                        System.out.println("Expense " + expenseId + " approved successfully.");
+                        System.out.println();
+                        break;
+                    }
+                    else {
+                        System.out.println("Expense ID not found in the pending list.");
+                        System.out.println();
+                    }
                 }
-                else {
-                    System.out.println("Expense ID not found in the pending list.");
+                catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number.");
                     System.out.println();
+                    sc.nextLine();
                 }
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number.");
-                System.out.println();
-                sc.nextLine();
             }
         }
         else {
@@ -82,33 +97,37 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public void rejectService(int managerId) {
+        logger.info("Manager {} is attempting to reject an expense.", managerId);
         List<Expense> expenses = dao.getPendingExpenses();
         List<Integer> expIds =  dao.getAllPendingExpenseId();
         System.out.println();
         if(!expenses.isEmpty()){
             System.out.println("PENDING EXPENSES TO BE REJECTED");
             printExpenses(expenses);
-            try {
-                System.out.println();
-                System.out.print("Enter a valid Expense ID to reject: ");
-                int expenseId = sc.nextInt();
-                sc.nextLine();
-                if (expIds.contains(expenseId)){
-                    System.out.print("Enter comment: ");
-                    String rejectComment = sc.nextLine();
-                    dao.rejectExpense(expenseId, managerId, rejectComment);
-                    System.out.println("Expense " + expenseId + " rejected successfully.");
-                    System.out.println();
+            System.out.println();
+            while(true){
+                try {
+                    System.out.print("Enter a valid Expense ID to reject: ");
+                    int expenseId = sc.nextInt();
+                    sc.nextLine();
+                    if (expIds.contains(expenseId)){
+                        System.out.print("Enter comment: ");
+                        String rejectComment = sc.nextLine();
+                        dao.rejectExpense(expenseId, managerId, rejectComment);
+                        System.out.println("Expense " + expenseId + " rejected successfully.");
+                        System.out.println();
+                        break;
+                    }
+                    else {
+                        System.out.println("Expense ID not found in the pending list.");
+                        System.out.println();
+                    }
                 }
-                else {
-                    System.out.println("Expense ID not found in the pending list.");
+                catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number.");
                     System.out.println();
+                    sc.nextLine();
                 }
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number.");
-                System.out.println();
-                sc.nextLine();
             }
         }
         else{
@@ -137,7 +156,7 @@ public class ExpenseServiceImpl implements ExpenseService {
             );
         }
     }
-    private String trim(String s, int maxLength) {
+    public String trim(String s, int maxLength) {
         if (s == null) return "";
         if (s.length() <= maxLength) return s;
         return s.substring(0, maxLength - 3) + "...";

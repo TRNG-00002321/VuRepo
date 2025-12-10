@@ -20,10 +20,8 @@ public class Menu {
                 System.out.println("2. View Pending Expenses");
                 System.out.println("3. Approve An Expense");
                 System.out.println("4. Reject An Expense");
-                System.out.println("5. Generate report by employee");
-                System.out.println("6. Generate report by category");
-                System.out.println("7. Generate report by date range");
-                System.out.println("8. Logout");
+                System.out.println("5. Generate report");
+                System.out.println("6. Logout");
                 System.out.print("Choose an option: ");
                 int choice = sc.nextInt();
                 sc.nextLine();
@@ -41,16 +39,12 @@ public class Menu {
                         expenseServiceImpl.rejectService(managerId);
                         break;
                     case 5:
-                        reportServiceImpl.generateReportByEmployee();
+                        reportServiceImpl.generateReportMenu();
                         break;
                     case 6:
-                        break;
-                    case 7:
-                        reportServiceImpl.generateReportByDateRange();
-                        break;
-                    case 8:
                         System.out.println("Logging out...");
                         return;
+
                     default:
                         System.out.println("Invalid choice. Please enter a number between 1 and 8.");
                         System.out.println();

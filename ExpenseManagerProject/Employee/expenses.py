@@ -1,4 +1,5 @@
 import sqlite3
+
 from tabulate import tabulate
 from datetime import datetime
 
@@ -17,6 +18,10 @@ def submit_expense(user_id):
     description = input('Enter your expense description: ').strip()
     while True:
         date_input = input("Enter your expense date (YYYY-MM-DD): ").strip()
+        if date_input == "":
+            entered_date = datetime.today().date()
+            break
+
         try:
             entered_date = datetime.strptime(date_input, "%Y-%m-%d").date()
             today = datetime.today().date()
@@ -48,12 +53,15 @@ def view_expenses(user_id):
             expenses.id, 
             expenses.amount, 
             expenses.description, 
-            expenses.date,
-            approvals.status
+            expenses.date, 
+            approvals.status, 
+            approvals.comments,
+            approvals.review_date,
+            approvals.reviewer_id
         FROM expenses 
         LEFT JOIN approvals ON approvals.expense_id = expenses.id
         WHERE expenses.user_id = ?
-        ORDER BY expenses.date DESC
+        ORDER BY expenses.id ASC
     '''
 
     cursor.execute(query, (user_id,))
@@ -63,10 +71,10 @@ def view_expenses(user_id):
         print('No expenses yet!')
         return
     formatted_rows = [
-        (exp_id, f"${amount}", desc, date, status)
-        for exp_id, amount, desc, date, status in rows
+        (exp_id, f"${amount}", desc, date, status, comments, review_date, reviewer_id )
+        for exp_id, amount, desc, date, status, comments, review_date, reviewer_id in rows
     ]
-    print(tabulate(formatted_rows, headers=["Expense ID", "Amount", "Description", "Date", "Status"], tablefmt="fancy_grid"))
+    print(tabulate(formatted_rows, headers=["Expense ID", "Amount", "Description", "Date", "Status", "Comment", "Review Date", "Manager ID"], tablefmt="fancy_grid"))
 
 def view_pending_expenses(user_id):
     conn = sqlite3.connect('expenses.db')
@@ -82,7 +90,7 @@ def view_pending_expenses(user_id):
         LEFT JOIN approvals ON approvals.expense_id = expenses.id
         WHERE expenses.user_id = ?
             AND (approvals.status = 'pending')
-        ORDER BY expenses.date DESC
+        ORDER BY expenses.id ASC
     '''
 
     cursor.execute(query, (user_id,))
@@ -112,12 +120,13 @@ def view_expense_history(user_id):
             expenses.date, 
             approvals.status, 
             approvals.comments,
-            approvals.review_date
+            approvals.review_date,
+            approvals.reviewer_id
         FROM expenses 
         LEFT JOIN approvals ON approvals.expense_id = expenses.id
         WHERE expenses.user_id = ?
             AND approvals.status IN ('denied', 'approved')
-        ORDER BY expenses.date DESC
+        ORDER BY expenses.id ASC
     '''
 
     cursor.execute(query, (user_id,))
@@ -129,11 +138,11 @@ def view_expense_history(user_id):
         return
 
     formatted_rows = [
-        (exp_id, f"${amount}", desc, date, status, comments, review_date)
-        for exp_id, amount, desc, date, status, comments, review_date in rows
+        (exp_id, f"${amount}", desc, date, status, comments, review_date, reviewer_id)
+        for exp_id, amount, desc, date, status, comments, review_date, reviewer_id in rows
     ]
-    print(tabulate(rows, headers=["Expense ID", "Amount", "Description", "Date", "Status", "Comments","Review Date"], tablefmt="fancy_grid"))
-    print()
+    print(tabulate(rows, headers=["Expense ID", "Amount", "Description", "Date", "Status", "Comments","Review Date", "Manager ID"], tablefmt="fancy_grid"))
+
 
 def edit_expense(user_id):
     pending_list = view_pending_expenses(user_id)

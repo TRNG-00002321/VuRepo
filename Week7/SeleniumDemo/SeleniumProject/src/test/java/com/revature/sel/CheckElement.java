@@ -45,7 +45,7 @@ public class CheckElement {
         assertTrue(password.isDisplayed());
         assertTrue(loginButton.isDisplayed());
 
-        
+
         // Clear and enter credentials
         userName.clear();
         userName.sendKeys("tomsmith");

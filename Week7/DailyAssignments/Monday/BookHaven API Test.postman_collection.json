@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "b6d335dd-4ecf-454c-bd9b-e708f78446ea",
+		"name": "BookHaven API Test",
+		"description": "API tests for BookHaven catalog system - Week 7 Exercise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50827714",
+		"_collection_link": "https://vuphan1101-3194757.postman.co/workspace/Vu-Phan's-Workspace~fff7ed8e-24d4-4f1c-8fbc-98c0a18f331c/collection/50827714-b6d335dd-4ecf-454c-bd9b-e708f78446ea?action=share&source=collection_link&creator=50827714"
+	},
+	"item": [
+		{
+			"name": "Setup",
+			"item": [
+				{
+					"name": "Health Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"API is available\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is valid JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Set flag for subsequent tests\r",
+									"pm.collectionVariables.set(\"apiAvailable\", \"true\");\r",
+									"console.log(\"✅ API Health Check Passed\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/posts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Operations",
+			"item": []
+		},
+		{
+			"name": "Post Operations",
+			"item": [
+				{
+					"name": "Get Post by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is success (2xx)\", function() {\r",
+									"    pm.expect(pm.response.code).to.be.within(200, 299);\r",
+									"});\r",
+									"pm.test(\"Status message is OK\", function() {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"pm.test(\"Fail if status is 404\", function(){\r",
+									"    pm.expect(pm.response.code).to.not.equal(404);\r",
+									"})\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"// Test: Response has required fields\r",
+									"pm.test(\"Response has required fields\", function() {\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData).to.have.property(\"title\");\r",
+									"    pm.expect(jsonData).to.have.property(\"body\");\r",
+									"    pm.expect(jsonData).to.have.property(\"userId\");\r",
+									"});\r",
+									"\r",
+									"// Test: Data types are correct\r",
+									"pm.test(\"Data types are correct\", function() {\r",
+									"    pm.expect(jsonData.id).to.be.a('number');\r",
+									"    pm.expect(jsonData.title).to.be.a('string');\r",
+									"    pm.expect(jsonData.body).to.be.a('string');\r",
+									"    pm.expect(jsonData.userId).to.be.a('number');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Post Id is 1\", function(){\r",
+									"    pm.expect(jsonData.id).to.equal(1);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Title is not empty\", function() {\r",
+									"    pm.expect(jsonData.title).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"userId is within 1-10\", function(){\r",
+									"    pm.expect(jsonData.userId).to.be.within(1,10)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"title has minimum length of 5 chars\", function(){\r",
+									"    pm.expect(jsonData.title).to.have.lengthOf.at.least(5)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"body contain a specific word\", function(){\r",
+									"    pm.expect(jsonData.body).to.include(\"quia\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is less than 300ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Posts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Log current environment configuration\r",
+									"console.log(\"=== Environment Configuration ===\");\r",
+									"console.log(\"Base URL:\", pm.environment.get(\"baseUrl\"));\r",
+									"console.log(\"API Version:\", pm.environment.get(\"apiVersion\"));\r",
+									"console.log(\"Debug Mode:\", pm.environment.get(\"debugMode\"));\r",
+									"console.log(\"================================\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const debugMode = pm.environment.get(\"debugMode\") === \"true\";\r",
+									"\r",
+									"pm.test(\"Response time within SLA\", function() {\r",
+									"    const timeout = parseInt(pm.environment.get(\"timeout\"));\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an array\", function(){\r",
+									"    pm.expect(jsonData).to.be.an(\"array\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Array is not empty\", function(){\r",
+									"    pm.expect(jsonData).to.have.length.above(0)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Array has 100 posts\", function(){\r",
+									"    pm.expect(jsonData).to.have.length(100)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"First item has required fields\", function(){\r",
+									"    const firstPost = jsonData[0];\r",
+									"    pm.expect(firstPost).to.have.all.keys(\"userId\",\"id\",\"title\",\"body\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"All items have id property\", function(){\r",
+									"    jsonData.forEach(post => {\r",
+									"        pm.expect(post).to.have.property(\"id\")\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"All ids are unique\", function(){\r",
+									"    const ids = jsonData.map(post => post.id);\r",
+									"    pm.expect(ids).to.have.lengthOf(ids.filter((id, index) => ids.indexOf(id) === index).length)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"UserIDs are between 1-100\",function(){\r",
+									"    pm.expect(jsonData.every(post => post.userId >= 1 && post.userId <= 100)).to.be.true\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is under 500ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is within SLA\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.within(0,2000);\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "x-request-timeout",
+								"value": "{{timeout}}",
+								"type": "text"
+							},
+							{
+								"key": "x-debug-mode",
+								"value": "{{debugMode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/posts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Posts by User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts?userId=1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE New Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is under 500\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Content_Type is JSON\", function(){\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Has required headers\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"API Testing is Essential\",\r\n    \"body\": \"Every QA engineer should master API testing as it provides fast, reliable validation of backend services.\",\r\n    \"userId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"title\": \"Updated Title - API Testing\",\r\n    \"body\": \"This post has been updated via PUT request\",\r\n    \"userId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expecting 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/9999",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invalid Resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is empty object\", function(){\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(Object.keys(jsonData).length).to.equal(0)\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/9999",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invalid Endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/invalid",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"invalid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post empty body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.expect([201]).to.include(pm.response.code);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response does not contain body and title\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.not.have.property(\"title\")\r",
+							"    pm.expect(jsonData).to.not.have.property(\"userId\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"body\": true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post with Dynamic Var",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Test Post {{$randomLoremWords}}\",\r\n    \"body\": \"{{$randomLoremParagraph}}\",\r\n    \"userId\": {{$randomInt}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post with Pre-Script",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate unique email with timestamp\r",
+							"const timestamp = Date.now();\r",
+							"const randomNum = Math.floor(Math.random() * 10000);\r",
+							"const uniqueEmail = `testuser_${timestamp}_${randomNum}@bookhaven.test`;\r",
+							"\r",
+							"pm.environment.set(\"uniqueEmail\", uniqueEmail);\r",
+							"console.log(\"Generated email:\", uniqueEmail);\r",
+							"\r",
+							"// Function to generate random number in range\r",
+							"function randomBetween(min, max) {\r",
+							"    return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+							"}\r",
+							"\r",
+							"// Generate test data\r",
+							"pm.environment.set(\"randomAge\", randomBetween(18, 65));\r",
+							"pm.environment.set(\"randomQuantity\", randomBetween(1, 10));\r",
+							"pm.environment.set(\"randomPrice\", (randomBetween(999, 9999) / 100).toFixed(2));\r",
+							"\r",
+							"console.log(\"Age:\", pm.environment.get(\"randomAge\"));\r",
+							"console.log(\"Quantity:\", pm.environment.get(\"randomQuantity\"));\r",
+							"console.log(\"Price:\", pm.environment.get(\"randomPrice\"));\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{uniqueEmail}}\",\r\n    \"name\": \"Test User\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "apiAvailable",
+			"value": ""
+		}
+	]
+}

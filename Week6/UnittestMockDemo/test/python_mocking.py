@@ -5,8 +5,9 @@ def greet(func):
     return "Hello, " + func()
 
 class TestMostBasic(unittest.TestCase):
-    def test_mock_return_value_and_asser_call(self):
-        fake_func = Mock(return_value="World")
+    def test_mock_return_value_and_assert_call(self):
+        fake_func = Mock()
+        fake_func.return_value = "World"
         result = greet(fake_func)
 
         # behavior check

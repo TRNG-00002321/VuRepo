@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a7d8dba9-1b96-4759-9196-de223bfd7589" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/src/main/java/com/revature/mock/EmailClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/src/main/java/com/revature/mock/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/src/main/java/com/revature/mock/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/src/main/java/com/revature/mock/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Tuesday/src/test/java/com/revature/mock/UserServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/main/java/com/revature/assignments/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/main/java/com/revature/assignments/utils/Calculator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/main/java/com/revature/assignments/utils/StringUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/main/java/com/revature/assignments/utils/UserValidation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/main/java/com/revature/assignments/utils/ValidationException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/test/java/CalculatorTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/test/java/CalculatorTestParamerized.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/test/java/StringUtilsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/UnitTestingDay1/src/test/java/UserValidationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/.idea/Wednesday.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/tests/conftest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PracticeAssignments/Wednesday/tests/test_data/calculator_tests.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UnittestMockDemo/test/python_mocking.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../UnittestMockDemo/test/python_mocking.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="36tZRbIfwJiurYdmwFhwixTHjUk" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.DemoRestAssured01.executor": "Run",
+    "JUnit.DemoRestCRUD.completeCrudFlow_createReadUpdateDelete.executor": "Run",
+    "JUnit.DemoRestCRUD.executor": "Run",
+    "JUnit.DemoRestCRUD.extractAndAssert_withJUnit.executor": "Run",
+    "JUnit.DemoRestCRUD.getIndividualPost (1).executor": "Run",
+    "JUnit.DemoRestCRUD.getIndividualPost.executor": "Run",
+    "JUnit.DemoRestCRUD.testSerialObject.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.DemoRestCRUD.completeCrudFlow_createReadUpdateDelete">
+    <configuration name="DemoRestCRUD.completeCrudFlow_createReadUpdateDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RestAssureDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ra" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ra.DemoRestCRUD" />
+      <option name="METHOD_NAME" value="completeCrudFlow_createReadUpdateDelete" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoRestCRUD.extractAndAssert_withJUnit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RestAssureDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ra" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ra.DemoRestCRUD" />
+      <option name="METHOD_NAME" value="extractAndAssert_withJUnit" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoRestCRUD.getIndividualPost (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RestAssureDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ra" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ra.DemoRestCRUD" />
+      <option name="METHOD_NAME" value="getIndividualPost(int,java.lang.String)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoRestCRUD.getIndividualPost" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RestAssureDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ra" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ra.DemoRestCRUD" />
+      <option name="METHOD_NAME" value="getIndividualPost(int)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoRestCRUD.testSerialObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RestAssureDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ra" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ra.DemoRestCRUD" />
+      <option name="METHOD_NAME" value="testSerialObject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DemoRestCRUD.completeCrudFlow_createReadUpdateDelete" />
+        <item itemvalue="JUnit.DemoRestCRUD.extractAndAssert_withJUnit" />
+        <item itemvalue="JUnit.DemoRestCRUD.getIndividualPost (1)" />
+        <item itemvalue="JUnit.DemoRestCRUD.getIndividualPost" />
+        <item itemvalue="JUnit.DemoRestCRUD.testSerialObject" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a7d8dba9-1b96-4759-9196-de223bfd7589" name="Changes" comment="" />
+      <created>1765827822433</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765827822433</updated>
+    </task>
+    <servers />
+  </component>
+</project>
